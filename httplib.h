@@ -346,6 +346,8 @@ using Headers = std::multimap<std::string, std::string, detail::ci>;
 using Params = std::multimap<std::string, std::string>;
 using Match = std::smatch;
 
+using Extras = std::map<std::string, std::map<std::string, std::string>>;
+
 using Progress = std::function<bool(uint64_t current, uint64_t total)>;
 
 struct Response;
@@ -461,6 +463,7 @@ struct Request {
   MultipartFormDataMap files;
   Ranges ranges;
   Match matches;
+  mutable Extras extras;
 
   // for client
   ResponseHandler response_handler;
