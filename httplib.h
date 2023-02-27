@@ -1656,6 +1656,7 @@ inline ssize_t Stream::write_format(const char *fmt, const Args &...args) {
 }
 
 inline void default_socket_options(socket_t sock) {
+#ifdef CPPHTTPLIB_SHARED_PORT_SUPPORT
   int yes = 1;
 #ifdef _WIN32
   setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char *>(&yes),
@@ -1669,6 +1670,7 @@ inline void default_socket_options(socket_t sock) {
 #else
   setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<void *>(&yes),
              sizeof(yes));
+#endif
 #endif
 #endif
 }
